@@ -1,0 +1,4 @@
+displayName= Cywilizowany's Mod
+author= Jedyny Cywilizowany
+version= 1.0
+buildIgnore= bin/*, obj/*, Properties/*, .gitignore, README.*, *.csproj, *.sln, *.slnx, .editorconfig

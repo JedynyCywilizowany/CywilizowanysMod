@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\tModLoader.targets" />
+	
+	<PropertyGroup>
+		<Nullable>enable</Nullable>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<ItemGroup>
+	</ItemGroup>
+</Project>

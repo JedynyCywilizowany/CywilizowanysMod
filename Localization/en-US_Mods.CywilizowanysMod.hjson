@@ -1,0 +1,110 @@
+Items: {
+	CheatCharm: {
+		DisplayName: Cheat Charm
+		Tooltip: Designed to help with testing mods without pesky things like mortality getting in the way
+	}
+
+	DevSet_Cywil_Helmet: {
+		DisplayName: Jedyny Cywilizowany's Helmet
+		Tooltip: Work in progress
+	}
+
+	DevSet_Cywil_Chestpiece: {
+		DisplayName: Jedyny Cywilizowany's Chestpiece
+		Tooltip: Work in progress
+	}
+
+	DevSet_Cywil_Boots: {
+		DisplayName: Jedyny Cywilizowany's Boots
+		Tooltip: Work in progress
+	}
+
+	ItemCompressor: {
+		DisplayName: Item Compressor
+		Tooltip:
+			'''
+			Not finished, not planned
+			Use at your own risk
+			'''
+	}
+
+	Autoseller: {
+		DisplayName: Autoselling Station
+		Tooltip: Autosells selected items to the happiest vendor in range, but for a reduced price
+	}
+
+	AutosellerBag: {
+		DisplayName: Autoselling Bag
+		Tooltip:
+			'''
+			Allows remote autoselling, but with limited capacity
+			Empties when normal autoselling is possible
+			'''
+	}
+}
+
+Buffs: {
+	Autoselling: {
+		DisplayName: Autoselling
+		Description: Selected items will be autosold if possible
+	}
+}
+
+Configs: {
+	CywilsConfig_Client: {
+		DisplayName: Client Config
+
+		TextureLoadOptimization: {
+			Label: Texture Load Optimization
+			Tooltip:
+				'''
+				If enabled, most textures will only be loaded once they are used
+				Might be incompatibile with some mods
+				'''
+		}
+
+		AutosellWhenBagIsFull: {
+			Label: Autosell When Bag Is Full
+			Tooltip: Whether Autoselling Bag should continue collecting items when it's full, even though no more coins will be gained
+		}
+	}
+
+	CywilsConfig_World: {
+		DisplayName: World Config
+
+		ShowDayCounter: {
+			Label: Show Day Counter
+			Tooltip: ""
+		}
+	}
+
+	CywilsConfig_Debug: {
+		DisplayName: Debug Config
+
+		ReportPackets: {
+			Label: Report Packets
+			Tooltip: ""
+		}
+	}
+}
+
+Keybinds.ToggleAutosellForItem.DisplayName: Toggle Autosell For Item
+
+Tooltips: {
+	ItemAutosold: {
+		Inventory: This item is autosold
+		List: This item is listed as autosold, click to remove it
+	}
+
+	AutosellingEnabled: {
+		True: Autoselling is currently enabled, right click to disable
+		False: Autoselling is currently disabled, right click to enable
+	}
+}
+
+UI: {
+	AutosoldItemList: Autosold Item List
+	DropAutosold: Drop Autosold Items from Inventory
+}
+
+Messages.DayCounter: Day {0}

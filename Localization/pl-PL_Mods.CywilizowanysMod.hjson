@@ -1,0 +1,110 @@
+Items: {
+	CheatCharm: {
+		DisplayName: Obrączka oszustwa
+		Tooltip: Zaprojektowana do pomocy w testowaniu modów bez przeszkód ze strony nieznośnych rzeczy, takich jak śmiertelność
+	}
+
+	DevSet_Cywil_Helmet: {
+		DisplayName: Hełm Jedynego Cywilizowanego
+		Tooltip: Work in progress
+	}
+
+	DevSet_Cywil_Chestpiece: {
+		DisplayName: Napierśnik Jedynego Cywilizowanego
+		Tooltip: Work in progress
+	}
+
+	DevSet_Cywil_Boots: {
+		DisplayName: Buty Jedynego Cywilizowanego
+		Tooltip: Work in progress
+	}
+
+	ItemCompressor: {
+		DisplayName: Kompresor przedmiotów
+		Tooltip:
+			'''
+			Nie skończone, nie planowane
+			Używaj na własną odpowiedzialność
+			'''
+	}
+
+	Autoseller: {
+		DisplayName: Stacja do autosprzedaży
+		Tooltip: Automatycznie sprzedaje wybrane przedmioty do najszczęśliwszego kupca w zasięgu, ale po zredukowanej cenie
+	}
+
+	AutosellerBag: {
+		DisplayName: Torba do autosprzedaży
+		Tooltip:
+			'''
+			Pozwala na zdalną autosprzedaż, ale ma ograniczoną pojemność
+			Oprużnia się gdy normalna autosprzedaż jest możliwa
+			'''
+	}
+}
+
+Buffs: {
+	Autoselling: {
+		DisplayName: Autosprzedaż
+		Description: Wybrane przedmioty będą automatycznie sprzedawane, jeśli to możliwe
+	}
+}
+
+Configs: {
+	CywilsConfig_Client: {
+		DisplayName: Ustawienia klienta
+
+		TextureLoadOptimization: {
+			Label: Optymalizacja ładowania tekstur
+			Tooltip:
+				'''
+				Jeśli włączone, większość tekstur będzie ładowane tylko gdy są używane
+				Może być niekompatybilne z niektórymi modami
+				'''
+		}
+
+		AutosellWhenBagIsFull: {
+			Label: Autosprzedaż przy pełnej torbie
+			Tooltip: Czy torba do autosprzedaży powinna wciąż zbierać przedmioty jak jest pełna, mimo że nie zapewni więcej monet
+		}
+	}
+
+	CywilsConfig_World: {
+		DisplayName: Ustawienia świata
+
+		ShowDayCounter: {
+			Label: Pokaż licznik dni
+			// Tooltip: ""
+		}
+	}
+
+	CywilsConfig_Debug: {
+		// DisplayName: Debug Config
+
+		ReportPackets: {
+			// Label: Report Packets
+			// Tooltip: ""
+		}
+	}
+}
+
+Keybinds.ToggleAutosellForItem.DisplayName: Przełącz autosprzedaż dla przedmiotu
+
+Tooltips: {
+	ItemAutosold: {
+		Inventory: Ten przedmiot jest automatycznie sprzedawany
+		List: Ten przedmiot jest na liście do autosprzedaży, kliknij aby go usunąć
+	}
+
+	AutosellingEnabled: {
+		True: Autosprzedaż włączona, kliknij prawym aby wyłączyć
+		False: Autosprzedaż wyłączona, kliknij prawym aby włączyć
+	}
+}
+
+UI: {
+	AutosoldItemList: Lista przedmiotów na autosprzedaż
+	DropAutosold: Wyrzuć przedmioty na autosprzedaż z ekwipunku
+}
+
+Messages.DayCounter: Dzień {0}

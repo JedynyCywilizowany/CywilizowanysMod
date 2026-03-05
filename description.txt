@@ -1,0 +1,25 @@
+Jedyny Cywilizowany's main mod
+
+Mainly focused on minor tweaks and QoL.
+Also serves as a library for my other (unpublished so far) mods, others may also use it in thier mods.
+I may one day move the library into a separate mod, possibly some other features too.
+
+Game Features:
+- Autoselling mechanic
+- World items rework:
+    > items float on water
+    > items merge better and despawn if left for too long (currently an hour), to prevent reaching item cap
+    > floating items slowly descend
+- Over 100% crit chance will instead boost damage
+- Sniper rifle tweak (more damage but slower)
+- A few optimizations
+- Day counter (a whole callendar mechanic planned)
+- In hardmode, meteorite slowly cools down (cold meteorite no longer spawns meteor heads, still drops the same thing)
+- Unobtainable Cheat Charm, an accessory to help with mod testing (you can take damage, but never drop below 1 life)
+- My own set (work in progress)
+- A few other minor things
+
+Library features:
+- CywilsPacketType, a ModType to help with managing mod packets
+- CywilsUtils (I don't bother listing everything there, there's a lot and it has documentation)
+- New base types for content, prefixed with "Cywils" (so far only changes the default texture path to my own convention)
