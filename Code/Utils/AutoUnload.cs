@@ -12,7 +12,7 @@ partial class CywilsUtils
 {
 	/// <summary>
 	/// Sets all static fields in all types from the given mod's assembly to null or default.<br/>
-	/// Intended to be used with this at the end of <see cref="Mod.Unload"/>.<br/>
+	/// Intended to be used with <c>this</c> at the end of <see cref="Mod.Unload"/>.<br/>
 	/// Does it help in any way? I don't know ¯\_(ツ)_/¯
 	/// </summary>
 	[MethodImpl(MethodImplOptions.NoInlining)]
