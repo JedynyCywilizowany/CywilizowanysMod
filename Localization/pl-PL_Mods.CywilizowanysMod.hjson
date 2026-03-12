@@ -6,17 +6,22 @@ Items: {
 
 	DevSet_Cywil_Helmet: {
 		DisplayName: Hełm Jedynego Cywilizowanego
-		Tooltip: Work in progress
+		// Tooltip: ""
 	}
 
 	DevSet_Cywil_Chestpiece: {
 		DisplayName: Napierśnik Jedynego Cywilizowanego
-		Tooltip: Work in progress
+		// Tooltip: ""
 	}
 
 	DevSet_Cywil_Boots: {
 		DisplayName: Buty Jedynego Cywilizowanego
-		Tooltip: Work in progress
+		// Tooltip: ""
+	}
+
+	DevSet_Cywil_Wings: {
+		DisplayName: Płaszcz Jedynego Cywilizowanego
+		// Tooltip: ""
 	}
 
 	ItemCompressor: {
@@ -38,7 +43,7 @@ Items: {
 		Tooltip:
 			'''
 			Pozwala na zdalną autosprzedaż, ale ma ograniczoną pojemność
-			Oprużnia się gdy normalna autosprzedaż jest możliwa
+			Opróżnia się gdy normalna autosprzedaż jest możliwa
 			'''
 	}
 }

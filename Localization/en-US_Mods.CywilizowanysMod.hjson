@@ -6,17 +6,22 @@ Items: {
 
 	DevSet_Cywil_Helmet: {
 		DisplayName: Jedyny Cywilizowany's Helmet
-		Tooltip: Work in progress
+		Tooltip: ""
 	}
 
 	DevSet_Cywil_Chestpiece: {
 		DisplayName: Jedyny Cywilizowany's Chestpiece
-		Tooltip: Work in progress
+		Tooltip: ""
 	}
 
 	DevSet_Cywil_Boots: {
 		DisplayName: Jedyny Cywilizowany's Boots
-		Tooltip: Work in progress
+		Tooltip: ""
+	}
+
+	DevSet_Cywil_Wings: {
+		DisplayName: Jedyny Cywilizowany's Cloak
+		Tooltip: ""
 	}
 
 	ItemCompressor: {

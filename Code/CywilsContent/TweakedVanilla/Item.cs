@@ -7,7 +7,8 @@ namespace CywilizowanysMod.ContentBases;
 public abstract class CywilsItem : ModItem,ICywilsContent
 {
 	string ICywilsContent.AssetCategory=>"Items";
-	public override string Texture=>this.DefaultTexturePath();
+	public virtual bool ReplaceDefaultTexturePath=>true;
+	public override string Texture=>(ReplaceDefaultTexturePath ? this.DefaultTexturePath() : base.Texture);
 
 	/// <summary>
 	/// If the item is body armor, return a <see cref="EquipType.Legs"/> slot to draw it over the legs, without replacing them like robes do.<br/>
