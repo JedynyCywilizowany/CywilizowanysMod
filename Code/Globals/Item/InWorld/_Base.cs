@@ -1,66 +1,21 @@
 ﻿using CywilizowanysMod.Common;
-using CywilizowanysMod.Items.Placeable;
+using CywilizowanysMod.Config;
 using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace CywilizowanysMod.Globals;
 
-public class CywilsGlobItem : GlobalItem
+partial class CywilsGlobItem : GlobalItem
 {
-	public override bool InstancePerEntity=>true;
-	
-	public bool isAutosellListDummy;
 	public bool merging;
 	public bool lastMerging;
-	public override void ModifyShootStats(Item item,Player player,ref Vector2 position,ref Vector2 velocity,ref int type,ref int damage,ref float knockback)
-	{
-		if (item.type==ItemID.SniperRifle) velocity*=1.75f;
-	}
-	public override void ModifyWeaponDamage(Item item,Player player,ref StatModifier damage)
-	{
-		if (item.type==ItemID.SniperRifle) damage*=5;
-		
-		int crit=player.GetWeaponCrit(item);
-		if (crit>100) damage*=crit/100f;
-	}
-	public override float UseTimeMultiplier(Item item,Player player)
-	{
-		if (item.type==ItemID.SniperRifle) return 5f;
-		return 1f;
-	}
-	public override float UseAnimationMultiplier(Item item,Player player)
-	{
-		if (item.type==ItemID.SniperRifle) return 5f;
-		return 1f;
-	}
 	public override void Update(Item item,ref float gravity,ref float maxFallSpeed)
 	{
-		bool surface=item.Bottom.ToTileCoordinates().Y<=Main.worldSurface;
-		var bottomTilePos=(item.Bottom-new Vector2(0f,1f)).ToTileCoordinates();
-		if (item.wet&&(!item.shimmerWet||!item.CanShimmer())&&Collision.WetCollision(item.position,item.width,item.height/2))
-		{
-			if (!Collision.WetCollision(item.position,item.width,1))
-			{
-				gravity=0f;
-				if (item.velocity.Y<0f) item.velocity.Y*=0.99f;
-			}
-			else if (item.velocity.Y>-0.2f) item.velocity.Y-=0.15f;
-		}
-		else if (surface&&ItemID.Sets.ItemNoGravity[item.type])
-		{	
-			if (item.velocity.Y<0.2) item.velocity.Y+=0.15f;
-		}
-		if (surface&&WorldGen.InWorld(bottomTilePos.X,bottomTilePos.Y)&&WorldGen.SolidTile(bottomTilePos))
-		{
-			item.position.Y-=4f;
-			item.velocity.Y=-0.2f;
-		}
-
 		if (item.stack<item.maxStack&&CywilsSystem.itemCapProgress>=0.25f)
 		{
 			const float maxStackRange=32*16;
@@ -100,10 +55,8 @@ public class CywilsGlobItem : GlobalItem
 				}
 			}
 		}
-		
 		if ((item.type==ItemID.CopperCoin||item.type==ItemID.SilverCoin||item.type==ItemID.GoldCoin)&&item.stack==item.maxStack/*&&(Main.netMode==NetmodeID.SinglePlayer||item.playerIndexTheItemIsReservedFor==Main.myPlayer)*/)
 		{
-			item.stack=1;
 			var reservedIndex=item.playerIndexTheItemIsReservedFor;
 			item.SetDefaults(item.type switch
 			{
@@ -112,8 +65,27 @@ public class CywilsGlobItem : GlobalItem
 				ItemID.GoldCoin=>ItemID.PlatinumCoin,
 				_=>ItemID.CopperCoin,
 			});
+			item.stack=1;
 			item.playerIndexTheItemIsReservedFor=reservedIndex;
 			//if (Main.netMode!=NetmodeID.SinglePlayer&&!item.instanced) NetMessage.SendData(MessageID.SyncItem,number:Array.FindIndex(Main.item,(r)=>ReferenceEquals(r,item)));
+		}
+
+		if (!merging)
+		{
+			if (ModContent.GetInstance<CywilsConfig_World>().UnstuckItems&&!AvailableSpace(item.position+Vector2.One,item.BottomRight-Vector2.One)) GetUnstuck(item);
+			else
+			{
+				unstuckingRadius=0;
+
+				if (item.wet&&(!item.shimmerWet||!item.CanShimmer())&&Collision.WetCollision(item.position,item.width,item.height/2))
+				{
+					if (item.velocity.Y>-0.2f) item.velocity.Y-=0.15f;
+				}
+				else if (ItemID.Sets.ItemNoGravity[item.type]&&(item.position.Y+item.height)/16<=Main.worldSurface)
+				{	
+					if (item.velocity.Y<0.2) item.velocity.Y+=0.15f;
+				}
+			}
 		}
 	}
 	public override void PostUpdate(Item item)
@@ -128,7 +100,7 @@ public class CywilsGlobItem : GlobalItem
 	}
 	public override bool CanPickup(Item item,Player player)
 	{
-		return !merging&&item.noGrabDelay<=0;
+		return !merging;
 	}
 	public override bool CanStackInWorld(Item destination,Item source)
 	{
@@ -163,8 +135,10 @@ public class CywilsGlobItem : GlobalItem
 		var modPlayer=player.GetModPlayer<CywilsPlayer>();
 		return modPlayer.AutosellingActive&&modPlayer.IsItemAutosold(item.type);
 	}
-	public override void ModifyTooltips(Item item,List<TooltipLine> tooltips)
+	public override void OnSpawn(Item item,IEntitySource source)
 	{
-		tooltips.UpdateTooltip(Mod,"Autosell",(Main.LocalPlayer.GetModPlayer<CywilsPlayer>().IsItemAutosold(item.type) ? $"[i:{ModContent.ItemType<Autoseller>()}]{Mod.GetLocalization(isAutosellListDummy ? "Tooltips.ItemAutosold.List" : "Tooltips.ItemAutosold.Inventory")}" : ""),Color.Gold);
+		unstuckingRadius=0;
+		merging=false;
+		lastMerging=false;
 	}
 }

@@ -2,23 +2,26 @@ Mainly focused on minor tweaks and QoL.
 Also serves as a library for my other (unpublished so far) mods, others may also use it in thier mods.
 I might one day move the library into a separate mod, possibly some other features too.
 
+Everything should work fine in multiplayer.
+
 Gameplay Features:
 - Autoselling (automatically sell selected types of items when picking them up, to avoid inventory clutter and still get money out of them)
 - World items rework:
 > > items float on water
-> > items merge better, to prevent reaching item cap
-> > floating items slowly descend
+> > items stuck in the ground slowly move to the nearest empty space (can be disabled in config)
+> > items merge better, to prevent reaching item cap and getting deleted
+> > floating items slowly descend (if above surface)
 > > coins no longer burn in lava
 - Over 100% critical chance will boost damage
 - Sniper Rifle tweak (more damage but slower)
 - A few optimizations
 - Day counter (a whole callendar mechanic planned)
-- In hardmode, meteorite slowly cools down (cold meteorite no longer spawns meteor heads, still drops the same thing)
+- In Hardmode, meteorite slowly cools down (cold meteorite no longer spawns meteor heads, still drops the same thing)
 - A few other minor things
 
 Library features:
 - CywilsPacketType, a ModType to help with managing mod packets
 - CywilsUtils (I don't bother listing everything there, there's a lot and it has documentation)
-- New base types for content, prefixed with "Cywils"
+- New base types for content, prefixed with "Cywils":
 > > optionally change the default texture path to my own convention
 > > CywilsItem lets body armor draw extra textures over legs, without replacing them like robes do. This effect is hard-coded into some vanilla vanity items, but there is no official mod support for it.

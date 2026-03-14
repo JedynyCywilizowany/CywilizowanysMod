@@ -78,8 +78,17 @@ Configs: {
 		DisplayName: Ustawienia świata
 
 		ShowDayCounter: {
-			Label: Pokaż licznik dni
-			// Tooltip: ""
+			Label: Licznik dni
+			Tooltip:
+				'''
+				Komunikuje w chatcie ile dni minęło na tym świecie, przy wchodzeniu i każdego ranka
+				Jeśli ta opcja jest wyłączona, dni wciąż są liczone, ale nie wyświetlane
+				'''
+		}
+
+		UnstuckItems: {
+			Label: Wydostawanie przedmiotów
+			Tooltip: Przedmioty, które utknęły w ziemii, będą powoli przemieszczać się w kierunku najbliższej pustej przestreni
 		}
 	}
 
@@ -88,7 +97,7 @@ Configs: {
 
 		ReportPackets: {
 			// Label: Report Packets
-			// Tooltip: ""
+			// Tooltip: Broadcast in chat whenever a CywilsPacket is sent or received
 		}
 	}
 }

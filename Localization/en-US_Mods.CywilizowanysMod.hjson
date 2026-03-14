@@ -78,8 +78,17 @@ Configs: {
 		DisplayName: World Config
 
 		ShowDayCounter: {
-			Label: Show Day Counter
-			Tooltip: ""
+			Label: Day Counter
+			Tooltip:
+				'''
+				Broadcast in chat the number of days that have passed on this world, when entering and every morning
+				When this setting is disabled, days are still being counted, but not displayed
+				'''
+		}
+
+		UnstuckItems: {
+			Label: Unstuck Items
+			Tooltip: Makes items stuck in the ground slowly move to the nearest empty space
 		}
 	}
 
@@ -88,7 +97,7 @@ Configs: {
 
 		ReportPackets: {
 			Label: Report Packets
-			Tooltip: ""
+			Tooltip: Broadcast in chat whenever a CywilsPacket is sent or received
 		}
 	}
 }
