@@ -24,15 +24,6 @@ Items: {
 		Tooltip: ""
 	}
 
-	ItemCompressor: {
-		DisplayName: Item Compressor
-		Tooltip:
-			'''
-			Not finished, not planned
-			Use at your own risk
-			'''
-	}
-
 	Autoseller: {
 		DisplayName: Autoselling Station
 		Tooltip: Autosells selected items to the happiest vendor in range, but for a reduced price

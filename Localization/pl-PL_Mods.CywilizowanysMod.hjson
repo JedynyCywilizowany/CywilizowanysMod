@@ -24,15 +24,6 @@ Items: {
 		// Tooltip: ""
 	}
 
-	ItemCompressor: {
-		DisplayName: Kompresor przedmiotów
-		Tooltip:
-			'''
-			Nie skończone, nie planowane
-			Używaj na własną odpowiedzialność
-			'''
-	}
-
 	Autoseller: {
 		DisplayName: Stacja do autosprzedaży
 		Tooltip: Automatycznie sprzedaje wybrane przedmioty do najszczęśliwszego kupca w zasięgu, ale po zredukowanej cenie
