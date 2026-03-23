@@ -31,6 +31,8 @@ partial class CywilizowanysMod : Mod
 				c.Prev!.MatchStloc(out int item3varIndex);
 
 				c.GotoNext(MoveType.After,(ins)=>ins.MatchCallvirt(typeof(BinaryWriter).GetMethod(nameof(BinaryWriter.Write),[typeof(short)])!));
+				c.Clone().GotoPrev((ins)=>ins.MatchLdloc(out _)).Next!.MatchLdloc(out int writerVarIndex);
+				
 				var jumpToMovedLabel=c.DefineLabel();
 				c.EmitBr(jumpToMovedLabel);
 				var backToBeginningLabel=c.MarkLabel();
@@ -41,7 +43,7 @@ partial class CywilizowanysMod : Mod
 					ins.MatchLdcI4(0)&&
 					ins.Next.MatchStloc(out _)
 				);
-				c2.Next!.Next!.MatchStloc(out int value2varIndex);
+				c2.Next!.Next.MatchStloc(out int value2varIndex);
 				var skipMovedLabel=c2.DefineLabel();
 				c2.EmitBr(skipMovedLabel);
 				c2.MarkLabel(jumpToMovedLabel);
@@ -59,6 +61,11 @@ partial class CywilizowanysMod : Mod
 				c2.EmitBrfalse(itemNotExistingLabel);
 				c2.EmitBr(backToBeginningLabel);
 				c2.MarkLabel(skipMovedLabel);
+
+				c2.EmitLdloc(writerVarIndex);
+				c2.EmitLdloc(item3varIndex);
+				c2.EmitLdfld(typeof(Item).GetField(nameof(Item.timeSinceItemSpawned))!);
+				c2.EmitCall(typeof(BinaryWriter).GetMethod(nameof(BinaryWriter.Write7BitEncodedInt))!);
 
 				c2.GotoNext(MoveType.After,(ins)=>ins.MatchCall(typeof(ItemIO).GetMethod(nameof(ItemIO.SendModData))!));
 				c2.MarkLabel(itemNotExistingLabel);
@@ -87,6 +94,7 @@ partial class CywilizowanysMod : Mod
 					var backToBeginningLabel=c.MarkLabel();
 
 					c.GotoNext((ins)=>ins.MatchCallvirt(typeof(BinaryReader).GetMethod(nameof(BinaryReader.ReadInt16))!));
+					c.Clone().GotoPrev((ins)=>ins.MatchLdfld(out _)).Next!.MatchLdloc(out int readerVarIndex);
 					//Item type
 					c.Next!.Next!.MatchStloc(out int num107varIndex);
 					c.Index-=2;
@@ -111,6 +119,14 @@ partial class CywilizowanysMod : Mod
 					c.EmitBr(returnLabel);
 
 					c.MarkLabel(skipMovedLabel);
+
+					c.EmitLdsfld(typeof(Main).GetField(nameof(Main.item))!);
+					c.EmitLdloc(num105varIndex);
+					c.EmitLdelemRef();
+					c.EmitLdarg0();
+					c.EmitLdfld(typeof(MessageBuffer).GetField(nameof(MessageBuffer.reader))!);
+					c.EmitCall(typeof(BinaryReader).GetMethod(nameof(BinaryReader.Read7BitEncodedInt))!);
+					c.EmitStfld(typeof(Item).GetField(nameof(Item.timeSinceItemSpawned))!);
 
 					c.GotoNext((ins)=>ins.MatchRet());
 					c.MarkLabel(returnLabel);

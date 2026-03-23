@@ -17,22 +17,6 @@ namespace CywilizowanysMod.Common;
 
 public static partial class CywilsUtils
 {
-	/*
-	public static bool[] MergeBoolSets(bool toKeep,params bool[][] sets)
-	{
-		var org=new bool[sets[0].Length];
-		foreach (var set in sets) for (int i=0;i<set.Length;i++) if (set[i]==toKeep) org[i]=toKeep;
-		return org;
-	}
-	public static bool SolidTile(this Tile Tile)
-	{
-		return Tile.HasTile&&Main.tileSolid[Tile.TileType]&&!TileID.Sets.Platforms[Tile.TileType]&&!Tile.IsActuated;
-	}
-	public static bool SolidTile(int x,int y)
-	{
-		return SolidTile(Framing.GetTileSafely(x,y));
-	}
-	*/
 	/// <summary>
 	/// Alphabethically compares the display names of two item types in the current language.
 	/// </summary>
@@ -49,7 +33,7 @@ public static partial class CywilsUtils
 	}
 	/// <summary>
 	/// Casts the given float-point number to int.<br/>
-	/// Randomly rounds up or down depending on the fractional part, so the average is closer to the original value.
+	/// Randomly rounds up or down depending on the fractional part, averages to the original value.
 	/// </summary>
 	public static int AveragedInt(this float x)
 	{
@@ -164,6 +148,13 @@ public static partial class CywilsUtils
 	public static bool IsLocal(this Player player)
 	{
 		return player.whoAmI==Main.myPlayer;
+	}
+	/// <summary>
+	/// Whether this item's <see cref="Item.playerIndexTheItemIsReservedFor"/> matches <see cref="Main.myPlayer"/>.
+	/// </summary>
+	public static bool IsReservedHere(this Item item)
+	{
+		return item.playerIndexTheItemIsReservedFor==Main.myPlayer;
 	}
 	/// <summary>
 	/// Emits <see cref="OpCodes.Call"/> to the method this delegate points to.<br/>

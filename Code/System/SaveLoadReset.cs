@@ -1,4 +1,3 @@
-using System;
 using CywilizowanysMod.Common;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -19,7 +18,6 @@ partial class CywilsSystem : ModSystem
 	{
 		itemCapProgress=0;
 		forceItemStackTime=0;
-		Array.Clear(itemDespawnTracker);
 		
 		DaysSinceStart=0;
 		lastMoonPhase=-1;

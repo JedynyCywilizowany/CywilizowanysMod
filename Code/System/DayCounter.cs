@@ -1,3 +1,4 @@
+using System.IO;
 using CywilizowanysMod.Config;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -7,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace CywilizowanysMod;
 
-public partial class CywilsSystem : ModSystem
+partial class CywilsSystem : ModSystem
 {
 	public static int DaysSinceStart{get;private set;}
 	private int lastMoonPhase;
@@ -27,4 +28,14 @@ public partial class CywilsSystem : ModSystem
 			lastMoonPhase=Main.moonPhase;
 		}
 	}
+	/*
+	public override void NetSend(BinaryWriter writer)
+	{
+		writer.Write7BitEncodedInt(DaysSinceStart);
+	}
+	public override void NetReceive(BinaryReader reader)
+	{
+		DaysSinceStart=reader.Read7BitEncodedInt();
+	}
+	*/
 }

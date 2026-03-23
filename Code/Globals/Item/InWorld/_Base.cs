@@ -12,6 +12,15 @@ namespace CywilizowanysMod.Globals;
 
 partial class CywilsGlobItem : GlobalItem
 {
+	internal const int ItemDespawnTime_Valuable=60*(60*60);
+	internal const int ItemDespawnTime_Cheap=30*(60*60);
+	internal const int ItemDespawnTime_Pickups=60*60;
+
+	public static int FindItemIndex(Item item)
+	{
+		return Array.FindIndex(Main.item,(r)=>ReferenceEquals(r,item));
+	}
+
 	public bool merging;
 	public bool lastMerging;
 	public override void Update(Item item,ref float gravity,ref float maxFallSpeed)
@@ -24,18 +33,18 @@ partial class CywilsGlobItem : GlobalItem
 			for (int i=0;i<Main.maxItems;i++)
 			{
 				Item item2=Main.item[i];
-				if (item2.active&&!item2.beingGrabbed&&!ReferenceEquals(item,item2)&&item2.type==item.type&&item2.stack<item2.maxStack&&item.instanced==item2.instanced)
+				if (item2.active&&!item2.beingGrabbed&&!ReferenceEquals(item,item2)&&item2.type==item.type&&item2.stack<item2.maxStack&&item.instanced==item2.instanced&&ItemLoader.CanStack(item,item2))
 				{
 					var center=item.Center;
 					var center2=item2.Center;
 					var centerDif=center2-center;
 					var centerDistSq=centerDif.LengthSquared();
-					if (centerDistSq<=stackRangeSq&&ItemLoader.CanStack(item,item2))
+					if (centerDistSq<=stackRangeSq)
 					{
 						merging=true;
 						item.noGrabDelay=15;
 						item2.noGrabDelay=15;
-						if ((Main.netMode==NetmodeID.SinglePlayer||item.playerIndexTheItemIsReservedFor==Main.myPlayer)&&(centerDistSq<256f||CywilsSystem.itemCapProgress>0.9f))
+						if (item.IsReservedHere()&&(centerDistSq<256f||CywilsSystem.itemCapProgress>0.9f))
 						{
 							ItemLoader.StackItems(item,item2,out int transferred);
 							if (item2.stack<=0)
@@ -55,7 +64,7 @@ partial class CywilsGlobItem : GlobalItem
 				}
 			}
 		}
-		if ((item.type==ItemID.CopperCoin||item.type==ItemID.SilverCoin||item.type==ItemID.GoldCoin)&&item.stack==item.maxStack/*&&(Main.netMode==NetmodeID.SinglePlayer||item.playerIndexTheItemIsReservedFor==Main.myPlayer)*/)
+		if ((item.type==ItemID.CopperCoin||item.type==ItemID.SilverCoin||item.type==ItemID.GoldCoin)&&item.stack==item.maxStack)
 		{
 			var reservedIndex=item.playerIndexTheItemIsReservedFor;
 			item.SetDefaults(item.type switch
@@ -67,7 +76,6 @@ partial class CywilsGlobItem : GlobalItem
 			});
 			item.stack=1;
 			item.playerIndexTheItemIsReservedFor=reservedIndex;
-			//if (Main.netMode!=NetmodeID.SinglePlayer&&!item.instanced) NetMessage.SendData(MessageID.SyncItem,number:Array.FindIndex(Main.item,(r)=>ReferenceEquals(r,item)));
 		}
 
 		if (!merging)
@@ -86,16 +94,45 @@ partial class CywilsGlobItem : GlobalItem
 					if (item.velocity.Y<0.2) item.velocity.Y+=0.15f;
 				}
 			}
+
+			if (!Main.dedServ||item.IsReservedHere())
+			{
+				int despawnTime;
+				if (ItemID.Sets.IsAPickup[item.type]) despawnTime=ItemDespawnTime_Pickups;
+				else if (item.rare==ItemRarityID.White&&item.type!=ItemID.GoldCoin&&item.type!=ItemID.PlatinumCoin) despawnTime=ItemDespawnTime_Cheap;
+				else despawnTime=ItemDespawnTime_Valuable;
+
+				var timeLeft=despawnTime-(item.timeSinceItemSpawned-ItemID.Sets.OverflowProtectionTimeOffset[item.type])/ItemID.Sets.ItemSpawnDecaySpeed[item.type];
+			
+				if (!Main.dedServ&&timeLeft<=60*60&&item.position.Between(Main.Camera.ScaledPosition,Main.Camera.ScaledPosition+Main.Camera.ScaledSize))
+				{
+					if (timeLeft%60==0&&despawnTime==ItemDespawnTime_Valuable)
+					{
+						CombatText.NewText(new Rectangle((int)item.Top.X,(int)item.Top.Y,0,0),Color.Yellow,timeLeft/60,dot:true);
+					}
+					if ((despawnTime!=ItemDespawnTime_Pickups||timeLeft<=5*60)&&Main.rand.NextBool(Math.Max(1,timeLeft/(despawnTime==ItemDespawnTime_Valuable ? 20 : 10))))
+					{
+						Dust.NewDustDirect(item.position,item.width,item.height,(despawnTime==ItemDespawnTime_Pickups ? DustID.TreasureSparkle : DustID.Smoke),item.velocity.X,item.velocity.Y,Scale:Main.rand.NextFloat(1f,2.5f)).velocity/=2f;
+					}
+				}
+				
+				if (item.IsReservedHere()&&timeLeft<0)
+				{
+					item.active=false;
+					if (Main.netMode!=NetmodeID.SinglePlayer&&!item.instanced) NetMessage.SendData(MessageID.SyncItem,number:FindItemIndex(item));
+				}
+			}
 		}
 	}
 	public override void PostUpdate(Item item)
 	{
 		if (Main.netMode!=NetmodeID.SinglePlayer&&!item.instanced)
 		{
-			if (!merging&&lastMerging) NetMessage.SendData(MessageID.SyncItem,number:Array.FindIndex(Main.item,(r)=>ReferenceEquals(r,item)));
+			if (!merging&&lastMerging) NetMessage.SendData(MessageID.SyncItem,number:FindItemIndex(item));
 			lastMerging=merging;
 		}
 		merging=false;
+
 		CywilsSystem.itemCounter++;
 	}
 	public override bool CanPickup(Item item,Player player)
@@ -105,6 +142,10 @@ partial class CywilsGlobItem : GlobalItem
 	public override bool CanStackInWorld(Item destination,Item source)
 	{
 		return CywilsSystem.itemCapProgress<0.25f;
+	}
+	public override void OnStack(Item destination,Item source,int numToTransfer)
+	{
+		destination.timeSinceItemSpawned=Math.Min(destination.timeSinceItemSpawned,source.timeSinceItemSpawned);
 	}
 	public override bool OnPickup(Item item,Player player)
 	{

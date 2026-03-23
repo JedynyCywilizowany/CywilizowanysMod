@@ -37,8 +37,6 @@ public partial class CywilsPlayer : ModPlayer
 	public override void OnEnterWorld()
 	{
 		UpdateAutosell();
-		
-		CywilsSystem.TryShowDayCounter();
 	}
 	
 	public override void ProcessTriggers(TriggersSet triggersSet)
