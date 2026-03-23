@@ -10,6 +10,9 @@ public class CywilsConfig_World : ModConfig
 	[DefaultValue(true)]
 	public bool ShowDayCounter{get;set;}
 	
+	[Header("WorldItems")]
 	[DefaultValue(true)]
 	public bool UnstuckItems{get;set;}
+	[DefaultValue(true)]
+	public bool DespawnAbandonedItems{get;set;}
 }

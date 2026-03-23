@@ -77,9 +77,20 @@ Configs: {
 				'''
 		}
 
+		Headers.WorldItems: Przedmioty w świecie
+
 		UnstuckItems: {
 			Label: Wydostawanie przedmiotów
 			Tooltip: Przedmioty, które utknęły w ziemii, będą powoli przemieszczać się w kierunku najbliższej pustej przestreni
+		}
+
+		DespawnAbandonedItems: {
+			Label: Znikanie porzuconych przedmiotów
+			Tooltip:
+				'''
+				Upuszczone przedmioty, pozostawione zbyt długo, znikną
+				Zwiększa wydajność i zmniejsza szansę osiągnięcia limitu przedmiotów
+				'''
 		}
 	}
 

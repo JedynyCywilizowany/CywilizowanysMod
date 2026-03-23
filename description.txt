@@ -8,9 +8,10 @@ Gameplay Features:
 - Autoselling (automatically sell selected types of items when picking them up, to avoid inventory clutter and still get money out of them)
 - World items rework:
 > > items float on water
+> > floating items (ex. souls) slowly descend if above surface, to work better with conveyor belts and avoid getting stuck mid-air out of reach
 > > items stuck in the ground slowly move to the nearest empty space (can be disabled in config)
 > > items merge better, to prevent reaching item cap and getting deleted
-> > floating items (ex. souls) slowly descend if above surface, to work better with conveyor belts and avoid getting stuck mid-air out of reach
+> > dropped items left for too long (30-60 IRL minutes) despawn, so that abandoned items don't reduce performance (can be disabled in config)
 > > coins no longer burn in lava
 - Over 100% critical chance will boost damage (ex. a weapon with 200 damage & 110% crit will work as if it had 220 damage & 100% crit)
 - Sniper Rifle tweak (more damage but slower)

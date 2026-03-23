@@ -77,9 +77,20 @@ Configs: {
 				'''
 		}
 
+		Headers.WorldItems: World Items
+
 		UnstuckItems: {
 			Label: Unstuck Items
 			Tooltip: Makes items stuck in the ground slowly move to the nearest empty space
+		}
+
+		DespawnAbandonedItems: {
+			Label: Despawn Abandoned Items
+			Tooltip:
+				'''
+				Makes dropped items left for too long despawn
+				Improves performance and reduces the chance of reaching item cap
+				'''
 		}
 	}
 

@@ -95,7 +95,7 @@ partial class CywilsGlobItem : GlobalItem
 				}
 			}
 
-			if (!Main.dedServ||item.IsReservedHere())
+			if (ModContent.GetInstance<CywilsConfig_World>().DespawnAbandonedItems&&(!Main.dedServ||item.IsReservedHere()))
 			{
 				int despawnTime;
 				if (ItemID.Sets.IsAPickup[item.type]) despawnTime=ItemDespawnTime_Pickups;
