@@ -23,7 +23,7 @@ public static partial class CywilsUtils
 	public static readonly Comparer<int> itemSortByNameComparer=Comparer<int>.Create((a,b)=>string.Compare(DummyItems[a].Name,DummyItems[b].Name));
 	/// <summary>
 	/// Divides an int.<br/>
-	/// The remainder is then used to randomly add 1 to the result, so the average is closer to the real quotient.
+	/// The remainder is then used to randomly add 1 to the result, so it averages to the real quotient.
 	/// </summary>
 	public static int AveragedDivide(this int x,int divideBy)
 	{
@@ -129,7 +129,7 @@ public static partial class CywilsUtils
 	/// </summary>
 	public static readonly ImmutableArray<int> CoinTypes=[ItemID.CopperCoin,ItemID.SilverCoin,ItemID.GoldCoin,ItemID.PlatinumCoin];
 	/// <summary>
-	/// Spawns the specified amount of money on the player.<br/>
+	/// Spawns the specified amount of coins on the player.<br/>
 	/// Can be called on both server and client.
 	/// </summary>
 	public static void GiveMoney(this Player player,int amount)

@@ -4,25 +4,46 @@ I might one day move the library into a separate mod, possibly some other featur
 
 Fully functional in multiplayer, like all mods should be.
 
+
 Gameplay Features:
+
 - Autoselling (automatically sell selected types of items when picking them up, to avoid inventory clutter and still get money out of them)
+
 - World items rework:
-> > items float on water
-> > floating items (ex. souls) slowly descend if above surface, to work better with conveyor belts and avoid getting stuck mid-air out of reach
-> > items stuck in the ground slowly move to the nearest empty space (can be disabled in config)
-> > items merge better, to prevent reaching item cap and getting deleted
-> > dropped items left for too long (30-60 IRL minutes) despawn, so that abandoned items don't reduce performance (can be disabled in config)
-> > coins no longer burn in lava
+>> items float on water
+>> floating items (ex. souls) slowly descend if above surface, to work better with conveyor belts and avoid getting stuck mid-air out of reach
+>> items stuck in the ground slowly move to the nearest empty space (can be disabled in config)
+>> items merge better, to prevent reaching item cap and getting deleted
+>> dropped items left for too long (30-60 IRL minutes) despawn, so that abandoned items don't reduce performance (can be disabled in config)
+>> coins no longer burn in lava
+
 - Over 100% critical chance will boost damage (ex. a weapon with 200 damage & 110% crit will work as if it had 220 damage & 100% crit)
+
 - Sniper Rifle tweak (more damage but slower)
-- A few optimizations
+
 - Day counter (a whole callendar mechanic planned)
+
 - In Hardmode, meteorite slowly cools down (cold meteorite no longer spawns meteor heads, still drops the same thing)
+
+- A few optimizations
+
 - A few other minor things
 
+
 Library features:
+
 - CywilsPacketType, a ModType to help with managing mod packets
-- CywilsUtils (I don't bother listing everything there, there's a lot and it has documentation)
+
 - New base types for content, prefixed with "Cywils":
-> > optionally change the default texture path to my own convention
-> > CywilsItem lets body armor draw extra textures over legs, without replacing them like robes do. This effect is hard-coded into some vanilla vanity items, but there is no official mod support for it.
+>> optionally change the default texture path to my own convention
+>> CywilsItem lets body armor draw extra textures over legs, without replacing them like robes do. This effect is hard-coded into some vanilla vanity items, but there is no official mod support for it.
+
+- CywilsUtils:
+>> RevertibleModify = modify an array (usually an ID set), then automatically revert the change when mods unload
+>> SerializeBools/DeserializeBools = efficiently serialize/deserialize arrays and lists of booleans
+>> AddIfNotEmpty/AddIfNotDefault = only add an entry into a TagCompound if it's not empty/default, without having to check for it manually
+>> GetMapColorTile/GetMapColorWall = get the color of a tile/wall type on the map
+>> DummyItems/DummyNPCs = easy and efficient access to reusable instances of items/NPCs by type
+>> AveragedInt = cast a float/double to int, randomly rounding it up or down so that the average stays the same
+>> UpdateTooltip = a single function for adding, modifying or removing a tooltip
+>> + a few more things that I didn't bother to list here
