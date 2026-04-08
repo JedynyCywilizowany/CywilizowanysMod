@@ -1,4 +1,4 @@
-using CywilizowanysMod.Common;
+using ColonyLib;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 

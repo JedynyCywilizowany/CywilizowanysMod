@@ -7,11 +7,11 @@ using Terraria.ObjectData;
 using Terraria.ModLoader;
 using Terraria.GameContent.ObjectInteractions;
 using CywilizowanysMod.Buffs;
-using CywilizowanysMod.ContentBases;
+using ColonyLib.ContentBases;
 
 namespace CywilizowanysMod.Tiles;
 
-public class Autoseller : CywilsTile
+public class Autoseller : ColonyTile
 {
 	public override void SetStaticDefaults()
 	{

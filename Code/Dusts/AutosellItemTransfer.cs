@@ -2,13 +2,13 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using System;
 using Terraria.UI;
-using CywilizowanysMod.ContentBases;
 using Terraria.ID;
-using CywilizowanysMod.Common;
+using ColonyLib.ContentBases;
+using ColonyLib;
 
 namespace CywilizowanysMod.Dusts;
 
-public class AutosellItemTransfer : CywilsDust
+public class AutosellItemTransfer : ColonyDust
 {
 	internal class AutosellTansferData(Vector2 stationPos,int owner,int buyer,int itemType,int coins)
 	{
@@ -19,7 +19,7 @@ public class AutosellItemTransfer : CywilsDust
 		public int coins=coins;
 	}
 
-	public override string Texture=>CywilsContentUtils.NoTexture;
+	public override string Texture=>ColonyContentUtils.NoTexture;
 	public override void OnSpawn(Dust dust)
 	{
 		dust.scale=1f;
@@ -30,7 +30,7 @@ public class AutosellItemTransfer : CywilsDust
 	{
 		if (dust.customData is AutosellTansferData data)
 		{
-			ItemSlot.DrawItemIcon(CywilsUtils.DummyItems[data.itemType],ItemSlot.Context.InWorld,Main.spriteBatch,dust.position-Main.screenPosition,dust.scale,32f,Lighting.GetColor(dust.position.ToTileCoordinates()));
+			ItemSlot.DrawItemIcon(ColonyUtils.DummyItems[data.itemType],ItemSlot.Context.InWorld,Main.spriteBatch,dust.position-Main.screenPosition,dust.scale,32f,Lighting.GetColor(dust.position.ToTileCoordinates()));
 		}
 		return false;
 	}

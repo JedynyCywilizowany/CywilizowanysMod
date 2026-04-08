@@ -3,9 +3,9 @@ using Terraria.ModLoader;
 using System.Collections.Generic;
 using Terraria.ID;
 using Terraria.ModLoader.IO;
-using CywilizowanysMod.ContentBases;
 using System.IO;
-using CywilizowanysMod.Common;
+using ColonyLib;
+using ColonyLib.ContentBases;
 
 namespace CywilizowanysMod;
 
@@ -84,10 +84,10 @@ partial class CywilsPlayer : ModPlayer
 		{}
 	}
 
-	public class SyncAutosoldItems : CywilsPacketType
+	public class SyncAutosoldItems : ColonyPacketType
 	{
 		public override bool AutoRedistributed=>true;
-		internal static CywilsPacket SyncForPlayer(Player player)
+		internal static ColonyPacket SyncForPlayer(Player player)
 		{
 			var packet=Get<SyncAutosoldItems>();
 			packet.Write((byte)player.whoAmI);
@@ -110,10 +110,10 @@ partial class CywilsPlayer : ModPlayer
 			}
 		}
 	}
-	public class SyncAutosellState : CywilsPacketType
+	public class SyncAutosellState : ColonyPacketType
 	{
 		public override bool AutoRedistributed=>true;
-		internal static CywilsPacket SyncForPlayer(Player player)
+		internal static ColonyPacket SyncForPlayer(Player player)
 		{
 			var packet=Get<SyncAutosellState>();
 			packet.Write((byte)player.whoAmI);

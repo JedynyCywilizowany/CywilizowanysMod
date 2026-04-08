@@ -1,4 +1,4 @@
-﻿using CywilizowanysMod.Common;
+﻿using ColonyLib;
 using CywilizowanysMod.Config;
 using Microsoft.Xna.Framework;
 using System;
@@ -154,7 +154,7 @@ partial class CywilsGlobItem : GlobalItem
 		{
 			SoundEngine.PlaySound((item.value>0 ? SoundID.Coins : SoundID.Grab),player.Center);
 			
-			int totalValue=CywilsUtils.AveragedInt(0.15d/modPlayer.AutosellingPriceMultiplier*item.value*item.stack);
+			int totalValue=(0.15d/modPlayer.AutosellingPriceMultiplier*item.value*item.stack).AveragedInt();
 			
 			if (modPlayer.autosellerBagAvailable&&!modPlayer.AutosellerAvailable)
 			{

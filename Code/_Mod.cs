@@ -1,6 +1,4 @@
-using System.IO;
-using CywilizowanysMod.Common;
-using CywilizowanysMod.ContentBases;
+using ColonyLib;
 using Terraria.ModLoader;
 
 namespace CywilizowanysMod;
@@ -16,11 +14,6 @@ public partial class CywilizowanysMod : Mod
 	}
 	public override void Unload()
 	{
-		CywilsUtils.RevertArrayModifications();
 		this.AutoUnload();
-	}
-	public override void HandlePacket(BinaryReader reader,int whoAmI)
-	{
-		CywilsPacketType.Receive(reader,whoAmI);
 	}
 }

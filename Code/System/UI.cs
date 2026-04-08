@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CywilizowanysMod.Common;
+using ColonyLib;
 using CywilizowanysMod.Globals;
 using CywilizowanysMod.Items;
 using CywilizowanysMod.Items.Placeable;
@@ -78,7 +78,7 @@ public class AutoSellerUI : UIState
 			Main.hoverItemName=CywilizowanysMod.Instance.GetLocalization("UI.AutosoldItemList").Value;
 		}
 		toggleButton.Draw(spriteBatch);
-		ItemSlot.DrawItemIcon(CywilsUtils.DummyItems[ModContent.ItemType<Autoseller>()],ItemSlot.Context.ChatItem,spriteBatch,new(toggleButton.Left.Pixels+(toggleButton.Width.Pixels/4f),toggleButton.Top.Pixels+(toggleButton.Height.Pixels/2f)),1f,32f,Color.White);
+		ItemSlot.DrawItemIcon(ColonyUtils.DummyItems[ModContent.ItemType<Autoseller>()],ItemSlot.Context.ChatItem,spriteBatch,new(toggleButton.Left.Pixels+(toggleButton.Width.Pixels/4f),toggleButton.Top.Pixels+(toggleButton.Height.Pixels/2f)),1f,32f,Color.White);
 		
 		if (dropAutosoldButton.IsMouseHovering)
 		{
@@ -86,7 +86,7 @@ public class AutoSellerUI : UIState
 			Main.hoverItemName=CywilizowanysMod.Instance.GetLocalization("UI.DropAutosold").Value;
 		}
 		dropAutosoldButton.Draw(spriteBatch);
-		ItemSlot.DrawItemIcon(CywilsUtils.DummyItems[ModContent.ItemType<AutosellerBag>()],ItemSlot.Context.ChatItem,spriteBatch,new(dropAutosoldButton.Left.Pixels+(dropAutosoldButton.Width.Pixels/2f),dropAutosoldButton.Top.Pixels+(dropAutosoldButton.Height.Pixels/2f)),1f,32f,Color.White);
+		ItemSlot.DrawItemIcon(ColonyUtils.DummyItems[ModContent.ItemType<AutosellerBag>()],ItemSlot.Context.ChatItem,spriteBatch,new(dropAutosoldButton.Left.Pixels+(dropAutosoldButton.Width.Pixels/2f),dropAutosoldButton.Top.Pixels+(dropAutosoldButton.Height.Pixels/2f)),1f,32f,Color.White);
 
 		if (showList)
 		{
@@ -115,7 +115,7 @@ public class AutoSellerUI : UIState
 				Rectangle rect=new((int)x,(int)y,slotSize,slotSize);
 
 				int index=i+listStartIndex;
-				var item=CywilsUtils.DummyItems[autosoldItems.ElementAt(index)];
+				var item=ColonyUtils.DummyItems[autosoldItems.ElementAt(index)];
 
 				spriteBatch.Draw(TextureAssets.InventoryBack.Value,rect,Color.White);
 				ItemSlot.DrawItemIcon(item,ItemSlot.Context.CraftingMaterial,spriteBatch,new(x+halfSlotSize,y+halfSlotSize),1f,slotSize,Color.White);

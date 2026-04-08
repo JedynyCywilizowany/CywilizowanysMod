@@ -93,15 +93,6 @@ Configs: {
 				'''
 		}
 	}
-
-	CywilsConfig_Debug: {
-		DisplayName: Debug Config
-
-		ReportPackets: {
-			Label: Report Packets
-			Tooltip: Broadcast in chat whenever a CywilsPacket is sent or received
-		}
-	}
 }
 
 Keybinds.ToggleAutosellForItem.DisplayName: Toggle Autosell For Item

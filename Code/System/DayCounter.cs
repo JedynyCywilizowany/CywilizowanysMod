@@ -1,4 +1,3 @@
-using System.IO;
 using CywilizowanysMod.Config;
 using Microsoft.Xna.Framework;
 using Terraria;

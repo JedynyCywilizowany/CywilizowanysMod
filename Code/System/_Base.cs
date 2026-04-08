@@ -35,7 +35,6 @@ public partial class CywilsSystem : ModSystem
 	}
 	public override void PostAddRecipes()
 	{
-		CywilsUtils.SetupDummyEntities();
 		CywilsSets.SetupSets();
 
 		foreach (var recipe in Main.recipe)

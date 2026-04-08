@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using CywilizowanysMod.Common;
+using ColonyLib;
+using ColonyLib.ContentBases;
 using CywilizowanysMod.Config;
-using CywilizowanysMod.ContentBases;
 using CywilizowanysMod.Items.Placeable;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -12,7 +12,7 @@ using Terraria.ModLoader.Default;
 
 namespace CywilizowanysMod.Items;
 
-public class AutosellerBag : CywilsItem
+public class AutosellerBag : ColonyItem
 {
 	public static readonly int capacity=100*Item.gold;
 	internal const int emptyingTime=60*10;
@@ -33,7 +33,7 @@ public class AutosellerBag : CywilsItem
 			{
 				if (Main.rand.NextBool(emptyingDelay))
 				{
-					var toDump=Math.Min(modPlayer.AutosellerBagFill,CywilsUtils.AveragedDivide(capacity,emptyingTime/emptyingDelay));
+					var toDump=Math.Min(modPlayer.AutosellerBagFill,ColonyUtils.AveragedDivide(capacity,emptyingTime/emptyingDelay));
 					if (player.whoAmI==Main.myPlayer)
 					{
 						var toGain=(toDump/modPlayer.AutosellingPriceMultiplier).AveragedInt();
@@ -52,7 +52,7 @@ public class AutosellerBag : CywilsItem
 		tooltips.UpdateTooltip(Mod,"AutosellerBagIsEnabled",Mod.GetLocalization(modPlayer.autosellingEnabled ? "Tooltips.AutosellingEnabled.True" : "Tooltips.AutosellingEnabled.False"));
 
 		int fill=modPlayer.AutosellerBagFill;
-		tooltips.UpdateTooltip(Mod,"AutosellerBagFill",$"{CywilsUtils.ValueToCoinsCompact(fill)} ({((float)fill/capacity).ToPercentage()}%)",(fill>=capacity ? Color.Red : null));
+		tooltips.UpdateTooltip(Mod,"AutosellerBagFill",$"{ColonyUtils.ValueToCoinsCompact(fill)} ({((float)fill/capacity).ToPercentage()}%)",(fill>=capacity ? Color.Red : null));
 	}
 
 	public override bool CanRightClick()

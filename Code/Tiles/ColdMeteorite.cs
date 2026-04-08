@@ -1,4 +1,4 @@
-using CywilizowanysMod.ContentBases;
+using ColonyLib.ContentBases;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace CywilizowanysMod.Tiles;
 
-public class ColdMeteorite : CywilsTile
+public class ColdMeteorite : ColonyTile
 {
 	public override string Texture=>"Terraria/Images/Tiles_"+TileID.Meteorite;
 	public override void SetStaticDefaults()

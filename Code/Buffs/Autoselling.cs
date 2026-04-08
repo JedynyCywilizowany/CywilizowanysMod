@@ -1,12 +1,13 @@
 using System;
+using ColonyLib;
+using ColonyLib.ContentBases;
 using CywilizowanysMod.Common;
-using CywilizowanysMod.ContentBases;
 using Microsoft.Xna.Framework;
 using Terraria;
 
 namespace CywilizowanysMod.Buffs;
 
-public class Autoselling : CywilsBuff
+public class Autoselling : ColonyBuff
 {
 	public override void SetStaticDefaults()
 	{

@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using ColonyLib;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -12,9 +13,9 @@ public static class CywilsSets
 	[MethodImpl(MethodImplOptions.NoInlining)]
 	internal static void SetupSets()
 	{
-		foreach (var type in CywilsUtils.CoinTypes) ItemID.Sets.IsLavaImmuneRegardlessOfRarity.RevertibleModify(type,true);
+		foreach (var type in ColonyUtils.CoinTypes) ItemID.Sets.IsLavaImmuneRegardlessOfRarity.RevertibleModify(type,true);
 
-		foreach (var npc in CywilsUtils.DummyNPCs)
+		foreach (var npc in ColonyUtils.DummyNPCs)
 		{
 			if (npc.isLikeATownNPC&&NPCShopDatabase.TryGetNPCShop(NPCShopDatabase.GetShopName(npc.type),out _))
 			{

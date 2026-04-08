@@ -1,11 +1,11 @@
-using CywilizowanysMod.ContentBases;
+using ColonyLib.ContentBases;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace CywilizowanysMod.Items.Placeable;
 
-public class Autoseller : CywilsItem
+public class Autoseller : ColonyItem
 {
 	public override void SetDefaults()
 	{

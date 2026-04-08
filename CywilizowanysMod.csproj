@@ -7,5 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\ColonyLib\ColonyLib.csproj" />
 	</ItemGroup>
 </Project>

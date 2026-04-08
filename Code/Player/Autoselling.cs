@@ -7,10 +7,10 @@ using System;
 using CywilizowanysMod.Items;
 using Microsoft.Xna.Framework;
 using CywilizowanysMod.Dusts;
-using CywilizowanysMod.ContentBases;
 using System.IO;
-using CywilizowanysMod.Common;
 using System.Linq;
+using ColonyLib;
+using ColonyLib.ContentBases;
 
 namespace CywilizowanysMod;
 
@@ -37,7 +37,7 @@ partial class CywilsPlayer : ModPlayer
 		}
 	}
 
-	public SortedSet<int> autosoldItems=(Main.dedServ ? new() : new(CywilsUtils.itemSortByNameComparer));
+	public SortedSet<int> autosoldItems=(Main.dedServ ? new() : new(ColonyUtils.itemSortByNameComparer));
 	public List<KeyValuePair<string,List<string>>> autosoldItemsUnloaded=[];
 	public bool IsItemAutosold(int itemType)
 	{
@@ -49,7 +49,7 @@ partial class CywilsPlayer : ModPlayer
 		return itemType==ModContent.ItemType<UnloadedItem>()||
 		itemType<=0||itemType>=ItemLoader.ItemCount||
 		ItemID.Sets.ItemsThatShouldNotBeInInventory[itemType]||
-		CywilsUtils.CoinTypes.Contains(itemType)||
+		ColonyUtils.CoinTypes.Contains(itemType)||
 		itemType==ModContent.ItemType<AutosellerBag>();
 	}
 	internal void UpdateAutosell()
@@ -73,7 +73,7 @@ partial class CywilsPlayer : ModPlayer
 		else AddToAutosell(itemType);
 	}
 
-	public class AutosellTransferAnimationBroadcast : CywilsPacketType
+	public class AutosellTransferAnimationBroadcast : ColonyPacketType
 	{
 		public override bool AutoRedistributed=>true;
 		public override void HandleClient(BinaryReader reader,int whoAmI)
@@ -94,7 +94,7 @@ partial class CywilsPlayer : ModPlayer
 	{
 		if (Main.netMode!=NetmodeID.SinglePlayer)
 		{
-			var packet=CywilsPacketType.Get<AutosellTransferAnimationBroadcast>();
+			var packet=ColonyPacketType.Get<AutosellTransferAnimationBroadcast>();
 			packet.Write((byte)Player.whoAmI);
 			packet.Write((ushort)autosellingTileX);
 			packet.Write((ushort)autosellingTileY);

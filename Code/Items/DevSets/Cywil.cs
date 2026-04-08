@@ -1,12 +1,12 @@
-using CywilizowanysMod.Common;
-using CywilizowanysMod.ContentBases;
+using ColonyLib;
+using ColonyLib.ContentBases;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace CywilizowanysMod.Items.DevSets;
 
-public abstract class DevSet_Cywil_Base : CywilsItem
+public abstract class DevSet_Cywil_Base : ColonyItem
 {
 	public override void SetDefaults()
 	{
@@ -61,9 +61,9 @@ public class DevSet_Cywil_Chestpiece : DevSet_Cywil_Base
 	}
 	public override bool IsVanitySet(int head,int body,int legs)
 	{
-		return head==CywilsUtils.DummyItems[ModContent.ItemType<DevSet_Cywil_Helmet>()].headSlot&&
+		return head==ColonyUtils.DummyItems[ModContent.ItemType<DevSet_Cywil_Helmet>()].headSlot&&
 		body==Item.bodySlot&&
-		(legs==CywilsUtils.DummyItems[ModContent.ItemType<DevSet_Cywil_Boots>()].legSlot||legs==DevSet_Cywil_Boots.femaleVariant);
+		(legs==ColonyUtils.DummyItems[ModContent.ItemType<DevSet_Cywil_Boots>()].legSlot||legs==DevSet_Cywil_Boots.femaleVariant);
 	}
 }
 [AutoloadEquip(EquipType.Legs)]

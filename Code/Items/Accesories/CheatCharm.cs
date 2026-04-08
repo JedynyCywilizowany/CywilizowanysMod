@@ -1,10 +1,10 @@
-using CywilizowanysMod.ContentBases;
+using ColonyLib.ContentBases;
 using Terraria;
 using Terraria.ID;
 
 namespace CywilizowanysMod.Items.Accesories;
 
-public class CheatCharm : CywilsItem
+public class CheatCharm : ColonyItem
 {
 	public override void SetDefaults()
 	{

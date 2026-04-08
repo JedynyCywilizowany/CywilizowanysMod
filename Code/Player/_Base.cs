@@ -2,7 +2,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.DataStructures;
 using Terraria.GameInput;
-using CywilizowanysMod.Common;
+using ColonyLib;
 
 namespace CywilizowanysMod;
 
