@@ -8,7 +8,6 @@ using CywilizowanysMod.Items;
 using Microsoft.Xna.Framework;
 using CywilizowanysMod.Dusts;
 using System.IO;
-using System.Linq;
 using ColonyLib;
 using ColonyLib.ContentBases;
 

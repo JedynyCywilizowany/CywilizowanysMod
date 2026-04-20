@@ -137,7 +137,7 @@ partial class CywilizowanysMod
 		}
 		catch (Exception e)
 		{
-			Instance.Logger.Error(e.Message);
+			Instance.Logger.Error(e);
 		}
 
 		/*
