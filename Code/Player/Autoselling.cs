@@ -79,9 +79,9 @@ partial class CywilsPlayer : ModPlayer
 		{
 			int playerId=reader.ReadByte();
 			Vector2 stationPos=new(reader.ReadUInt16()*16+16,reader.ReadUInt16()*16+16);
-			var buyer=reader.ReadUInt16();
-			var itemType=reader.ReadUInt16();
-			var returnedCoins=reader.ReadInt32();
+			var buyer=reader.Read7BitEncodedInt();
+			var itemType=reader.Read7BitEncodedInt();
+			var returnedCoins=reader.Read7BitEncodedInt();
 			AutosellTransferAnimation_SpawnDust(Main.player[playerId].Center,stationPos,playerId,buyer,itemType,returnedCoins);
 		}
 	}
@@ -97,9 +97,9 @@ partial class CywilsPlayer : ModPlayer
 			packet.Write((byte)Player.whoAmI);
 			packet.Write((ushort)autosellingTileX);
 			packet.Write((ushort)autosellingTileY);
-			packet.Write((ushort)autosellingBuyer);
-			packet.Write((ushort)itemType);
-			packet.Write(returnedCoins);
+			packet.Write7BitEncodedInt(autosellingBuyer);
+			packet.Write7BitEncodedInt(itemType);
+			packet.Write7BitEncodedInt(returnedCoins);
 			packet.Send();
 		}
 		if (!Main.dedServ) AutosellTransferAnimation_SpawnDust(Player.Center,new Vector2(AutosellingX,AutosellingY),Player.whoAmI,autosellingBuyer,itemType,returnedCoins);

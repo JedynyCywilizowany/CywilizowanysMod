@@ -92,7 +92,7 @@ partial class CywilsPlayer : ModPlayer
 			var packet=Get<SyncAutosoldItems>();
 			packet.Write((byte)player.whoAmI);
 			var list=player.GetModPlayer<CywilsPlayer>().autosoldItems;
-			packet.Write((ushort)list.Count);
+			packet.Write7BitEncodedInt(list.Count);
 			foreach (var item in list) packet.Write((ushort)item);
 			return packet;
 		}
@@ -100,8 +100,8 @@ partial class CywilsPlayer : ModPlayer
 		public override void Handle(BinaryReader reader,int whoAmI)
 		{
 			var modPlayer=Main.player[reader.ReadByte()].GetModPlayer<CywilsPlayer>();
-			int length=reader.ReadUInt16();
 			var set=modPlayer.autosoldItems;
+			int length=reader.Read7BitEncodedInt();
 			lock (set)
 			{
 				set.Clear();
