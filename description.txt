@@ -19,7 +19,7 @@ Gameplay Features:
 
 - Sniper Rifle tweak (more damage but slower)
 
-- Day counter (a whole callendar mechanic planned)
+- Day counter (counts days since the start of the world)
 
 - In Hardmode, meteorite slowly cools down (cold meteorite no longer spawns meteor heads, still drops the same thing)
 
