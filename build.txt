@@ -1,5 +1,5 @@
 displayName= Cywilizowany's Mod
 author= Jedyny Cywilizowany
-version= 2.0
+version= 2.0.0.1
 buildIgnore= bin/*, obj/*, Properties/*, .gitignore, README.*, *.csproj, *.sln, *.slnx, .editorconfig
 modReferences= ColonyLib
