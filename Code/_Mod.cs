@@ -1,4 +1,3 @@
-using ColonyLib;
 using Terraria.ModLoader;
 
 namespace CywilizowanysMod;
@@ -11,9 +10,5 @@ public partial class CywilizowanysMod : Mod
 	{
 		LoadILEditsAndDetours();
 		Keybinds.Setup(this);
-	}
-	public override void Unload()
-	{
-		this.AutoUnload();
 	}
 }

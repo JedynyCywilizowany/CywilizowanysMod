@@ -19,7 +19,7 @@ public class AutosellItemTransfer : ColonyDust
 		public int coins=coins;
 	}
 
-	public override string Texture=>ColonyContentUtils.NoTexture;
+	public override string Texture=>ColonyContentUtils.EmptyTexturePath;
 	public override void OnSpawn(Dust dust)
 	{
 		dust.scale=1f;
