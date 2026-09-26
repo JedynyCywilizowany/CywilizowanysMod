@@ -1,10 +1,12 @@
 using System;
+/*
 using System.IO;
 using ColonyLib;
 using MonoMod.Cil;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader.IO;
+*/
 
 namespace CywilizowanysMod;
 
@@ -14,6 +16,10 @@ partial class CywilizowanysMod
 	{
 		try
 		{
+			//Disabled as the current implementation leads to a bug that breaks instanced items.
+			//Instead of fixing it, I decided to stop bothering to fix the base game's poor optimization, at least in this mod.
+			//I'm keeping the code here in case it's useful again some time in the future.
+			/*
 			void NetMessage_SendData(ILContext il)
 			{
 				ILCursor c=new(il);
@@ -134,6 +140,7 @@ partial class CywilizowanysMod
 				IL_NetMessage.SendData-=NetMessage_SendData;
 				throw;
 			}
+			*/
 		}
 		catch (Exception e)
 		{
