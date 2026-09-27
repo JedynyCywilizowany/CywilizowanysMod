@@ -68,7 +68,7 @@ partial class CywilsSystem
 			item.playerIndexTheItemIsReservedFor=reservedIndex;
 		}
 
-		if (netUpdate) NetMessage.SendData(MessageID.SyncItem,number:item.FindItemIndex());
+		if (netUpdate) NetMessage.SendData(MessageID.SyncItem,number:item.whoAmI);
 		return isMerging;
 	}
 }

@@ -36,7 +36,7 @@ partial class CywilsSystem
 		if (item.IsReservedHere()&&timeLeft<0&&!item.beingGrabbed)
 		{
 			item.active=false;
-			if (Main.netMode!=NetmodeID.SinglePlayer&&!item.instanced) NetMessage.SendData(MessageID.SyncItem,number:item.FindItemIndex());
+			if (Main.netMode!=NetmodeID.SinglePlayer&&!item.instanced) NetMessage.SendData(MessageID.SyncItem,number:item.whoAmI);
 		}
 	}
 }
