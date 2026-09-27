@@ -1,11 +1,19 @@
+using System;
 using ColonyLib;
-using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
 namespace CywilizowanysMod;
 
-partial class CywilsSystem : ModSystem
+partial class CywilsSystem
 {
+	public override void ClearWorld()
+	{
+		itemCapProgress=0;
+		Array.Clear(worldItemUpdateDataArr);
+		
+		DaysSinceStart=0;
+		lastMoonPhase=-1;
+	}
 	public override void SaveWorldData(TagCompound tag)
 	{
 		tag.AddIfNotDefault(nameof(DaysSinceStart),DaysSinceStart);
@@ -13,13 +21,5 @@ partial class CywilsSystem : ModSystem
 	public override void LoadWorldData(TagCompound tag)
 	{
 		DaysSinceStart=tag.Get<int>(nameof(DaysSinceStart));
-	}
-	public override void ClearWorld()
-	{
-		itemCapProgress=0;
-		forceItemStackTime=0;
-		
-		DaysSinceStart=0;
-		lastMoonPhase=-1;
 	}
 }

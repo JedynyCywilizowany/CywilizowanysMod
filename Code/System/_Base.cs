@@ -7,20 +7,6 @@ namespace CywilizowanysMod;
 
 public partial class CywilsSystem : ModSystem
 {
-	internal static int itemCounter=0;
-	internal static float itemCapProgress=0f;
-	internal static uint forceItemStackTime=0;
-	public override void PreUpdateItems()
-	{
-		itemCapProgress=((float)itemCounter)/Main.maxItems;
-		itemCounter=0;
-		
-		if (forceItemStackTime!=0)
-		{
-			if (itemCapProgress<0.75) itemCapProgress=0.75f;
-			forceItemStackTime--;
-		}
-	}
 	public override void Load()
 	{
 		if (!Main.dedServ)

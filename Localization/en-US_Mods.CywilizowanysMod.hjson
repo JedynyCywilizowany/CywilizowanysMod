@@ -79,9 +79,9 @@ Configs: {
 
 		Headers.WorldItems: World Items
 
-		UnstuckItems: {
-			Label: Unstuck Items
-			Tooltip: Makes items stuck in the ground slowly move to the nearest empty space
+		ThresholdForItemMerging: {
+			Label: Threshold for Item Merging
+			Tooltip: The fraction of world item slots that need to be filled for items to start merging
 		}
 
 		DespawnAbandonedItems: {
@@ -91,6 +91,11 @@ Configs: {
 				Makes dropped items left for too long despawn
 				Improves performance and reduces the chance of reaching item cap
 				'''
+		}
+
+		UnstuckItems: {
+			Label: Unstuck Items
+			Tooltip: Makes items stuck in the ground slowly move to the nearest empty space
 		}
 	}
 }

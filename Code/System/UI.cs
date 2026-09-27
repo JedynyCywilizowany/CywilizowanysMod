@@ -161,7 +161,7 @@ public class AutoSellerUI : UIState
 		return -1;
 	}
 }
-partial class CywilsSystem : ModSystem
+partial class CywilsSystem
 {
 	internal UserInterface ui=null!;
 	internal AutoSellerUI autoSellerUI=null!;

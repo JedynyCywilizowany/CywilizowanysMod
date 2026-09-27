@@ -79,9 +79,9 @@ Configs: {
 
 		Headers.WorldItems: Przedmioty w świecie
 
-		UnstuckItems: {
-			Label: Wydostawanie przedmiotów
-			Tooltip: Przedmioty, które utknęły w ziemii, będą powoli przemieszczać się w kierunku najbliższej pustej przestreni
+		ThresholdForItemMerging: {
+			Label: Próg do łączenia przedmiotów
+			Tooltip: Część miesjc na przedmioty w świecie która musi być zapełniona, żeby przedmioty zaczęły się łączyć
 		}
 
 		DespawnAbandonedItems: {
@@ -91,6 +91,11 @@ Configs: {
 				Upuszczone przedmioty, pozostawione zbyt długo, znikną
 				Zwiększa wydajność i zmniejsza szansę osiągnięcia limitu przedmiotów
 				'''
+		}
+
+		UnstuckItems: {
+			Label: Wydostawanie przedmiotów
+			Tooltip: Przedmioty, które utknęły w ziemii, będą powoli przemieszczać się w kierunku najbliższej pustej przestreni
 		}
 	}
 }

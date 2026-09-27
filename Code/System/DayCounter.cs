@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace CywilizowanysMod;
 
-partial class CywilsSystem : ModSystem
+partial class CywilsSystem
 {
 	public static int DaysSinceStart{get;private set;}
 	private int lastMoonPhase;

@@ -11,8 +11,11 @@ public class CywilsConfig_World : ModConfig
 	public bool ShowDayCounter{get;set;}
 	
 	[Header("WorldItems")]
-	[DefaultValue(true)]
-	public bool UnstuckItems{get;set;}
+
+	[DefaultValue(0.25f)]
+	public float ThresholdForItemMerging{get;set;}
 	[DefaultValue(true)]
 	public bool DespawnAbandonedItems{get;set;}
+	[DefaultValue(true)]
+	public bool UnstuckItems{get;set;}
 }

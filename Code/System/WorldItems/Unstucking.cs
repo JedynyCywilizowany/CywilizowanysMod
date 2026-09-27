@@ -1,13 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.ModLoader;
 
-namespace CywilizowanysMod.Globals;
+namespace CywilizowanysMod;
 
-partial class CywilsGlobItem : GlobalItem
+partial class CywilsSystem
 {
-	private short unstuckingRadius;
-	private static bool AvailableSpace(int startX,int startY,int endX,int endY)
+	private static bool Item_Unstucking_AvailableSpace(int startX,int startY,int endX,int endY)
 	{
 		if (startX<0||startY<0||endX>=Main.maxTilesX||endY>=Main.maxTilesY) return false;
 		for (int x=startX;x<=endX;x++) for (int y=startY;y<=endY;y++)
@@ -16,7 +14,7 @@ partial class CywilsGlobItem : GlobalItem
 		}
 		return true;
 	}
-	private static bool AvailableSpace(Vector2 start,Vector2 end)
+	private static bool Item_Unstucking_AvailableSpace(Vector2 start,Vector2 end)
 	{
 		var startTile=start.ToTileCoordinates();
 		var endTile=end.ToTileCoordinates();
@@ -24,13 +22,13 @@ partial class CywilsGlobItem : GlobalItem
 		int startY=startTile.Y;
 		int endX=endTile.X;
 		int endY=endTile.Y;
-		return AvailableSpace(startX,startY,endX,endY);
+		return Item_Unstucking_AvailableSpace(startX,startY,endX,endY);
 	}
-	private static bool AvailableSpace(int startX,int startY,Point size)
+	private static bool Item_Unstucking_AvailableSpace(int startX,int startY,Point size)
 	{
-		return AvailableSpace(startX,startY,startX+size.X,startY+size.Y);
+		return Item_Unstucking_AvailableSpace(startX,startY,startX+size.X,startY+size.Y);
 	}
-	private void GetUnstuck(Item item)
+	private static void Item_Unstucking(Item item,ref ushort unstuckingRadius)
 	{
 		item.Bottom=item.Bottom.ToTileCoordinates().ToWorldCoordinates(8,14);
 		item.velocity=Vector2.Zero;
@@ -53,12 +51,12 @@ partial class CywilsGlobItem : GlobalItem
 
 			for (int i=0;i<=maxI;i++)
 			{
-				if (AvailableSpace(center.X+i,topY+i,size)||AvailableSpace(center.X-i,topY+i,size))
+				if (Item_Unstucking_AvailableSpace(center.X+i,topY+i,size)||Item_Unstucking_AvailableSpace(center.X-i,topY+i,size))
 				{
 					move.Y=-1;
 					goto foundTarget;
 				}
-				if (AvailableSpace(center.X+i,bottomY-i,size)||AvailableSpace(center.X-i,bottomY-i,size))
+				if (Item_Unstucking_AvailableSpace(center.X+i,bottomY-i,size)||Item_Unstucking_AvailableSpace(center.X-i,bottomY-i,size))
 				{
 					move.Y=1;
 					goto foundTarget;
@@ -68,12 +66,12 @@ partial class CywilsGlobItem : GlobalItem
 			for (int i=0;i<=maxI;i++)
 			{
 				var iDir=(i*dir);
-				if (AvailableSpace(x1+iDir,center.Y-i,size)||AvailableSpace(x1+iDir,center.Y+i,size))
+				if (Item_Unstucking_AvailableSpace(x1+iDir,center.Y-i,size)||Item_Unstucking_AvailableSpace(x1+iDir,center.Y+i,size))
 				{
 					move.X=-dir;
 					goto foundTarget;
 				}
-				if (AvailableSpace(x2-iDir,center.Y-i,size)||AvailableSpace(x2-iDir,center.Y+i,size))
+				if (Item_Unstucking_AvailableSpace(x2-iDir,center.Y-i,size)||Item_Unstucking_AvailableSpace(x2-iDir,center.Y+i,size))
 				{
 					move.X=dir;
 					goto foundTarget;
