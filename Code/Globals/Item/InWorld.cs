@@ -1,10 +1,8 @@
 ﻿using ColonyLib;
-using CywilizowanysMod.Config;
 using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace CywilizowanysMod.Globals;
 
@@ -45,6 +43,6 @@ partial class CywilsGlobItem
 	}
 	public override bool CanStackInWorld(Item destination,Item source)
 	{
-		return CywilsSystem.itemCapProgress<ModContent.GetInstance<CywilsConfig_World>().ThresholdForItemMerging;
+		return false;
 	}
 }

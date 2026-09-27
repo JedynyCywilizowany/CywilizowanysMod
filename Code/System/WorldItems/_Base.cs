@@ -13,7 +13,6 @@ partial class CywilsSystem
 	internal static float itemCapProgress=0f;
 	internal struct WorldItemUpdateData
 	{
-		public bool isMerging;
 		public ushort unstuckingRadius;
 	}
 	internal static readonly WorldItemUpdateData[] worldItemUpdateDataArr=new WorldItemUpdateData[Main.maxItems];
@@ -25,7 +24,7 @@ partial class CywilsSystem
 		{
 			var item=Main.item[i];
 			ref var updateDataRef=ref worldItemUpdateDataArr[i];
-			if (item.active)
+			if (item.active&&item.type!=ItemID.None&&item.stack>0&&item.whoAmI==i)
 			{
 				UpdateItem(item,ref updateDataRef);
 				itemCounter++;
@@ -37,9 +36,7 @@ partial class CywilsSystem
 	{
 		var config=ModContent.GetInstance<CywilsConfig_World>();
 
-		updateData.isMerging=(itemCapProgress>config.ThresholdForItemMerging&&!item.beingGrabbed)&&Item_Merging(item);
-
-		if (!item.beingGrabbed&&!updateData.isMerging)
+		if (!item.beingGrabbed&&!((itemCapProgress>config.ThresholdForItemMerging&&!item.beingGrabbed)&&Item_Merging(item)))
 		{
 			if (config.UnstuckItems&&!Item_Unstucking_AvailableSpace(item.position+Vector2.One,item.BottomRight-Vector2.One)) Item_Unstucking(item,ref updateData.unstuckingRadius);
 			else

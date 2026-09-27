@@ -19,7 +19,7 @@ partial class CywilsSystem
 			for (int i=0;i<Main.maxItems;i++)
 			{
 				Item item2=Main.item[i];
-				if (item2.active&&!item2.beingGrabbed&&!ReferenceEquals(item,item2)&&item2.type==item.type&&item2.stack<item2.maxStack&&item.instanced==item2.instanced&&item.playerIndexTheItemIsReservedFor==item2.playerIndexTheItemIsReservedFor&&ItemLoader.CanStack(item,item2))
+				if (item2.active&&!item2.beingGrabbed&&item.whoAmI!=item2.whoAmI&&item2.type==item.type&&item2.stack>0&&item2.stack<item2.maxStack&&item.instanced==item2.instanced&&item.playerIndexTheItemIsReservedFor==item2.playerIndexTheItemIsReservedFor&&ItemLoader.CanStack(item,item2))
 				{
 					var center=item.Center;
 					var center2=item2.Center;
@@ -30,13 +30,15 @@ partial class CywilsSystem
 						isMerging=true;
 						item.noGrabDelay=15;
 						item2.noGrabDelay=15;
-						if (item.IsReservedHere()&&(centerDistSq<256f||itemCapProgress>0.9f))
+						if (item.IsReservedHere()&&item.whoAmI<item2.whoAmI&&(centerDistSq<256f||itemCapProgress>0.9f))
 						{
 							ItemLoader.StackItems(item,item2,out int transferred);
 							if (item2.stack<=0)
 							{
 								item.Center=((item.Center*(item.stack-transferred))+(item2.Center*transferred))/item.stack;
 								item.velocity=((item.velocity*(item.stack-transferred))+(item2.velocity*transferred))/item.stack;
+
+								item2.TurnToAir();
 								item2.active=false;
 							}
 							if (Main.netMode!=NetmodeID.SinglePlayer&&!item.instanced)
