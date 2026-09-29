@@ -55,6 +55,6 @@ partial class CywilsSystem
 		}
 		else updateData=default;
 
-		if (config.DespawnAbandonedItems&&(!Main.dedServ||item.IsReservedHere())) Item_Despawning(item);
+		if ((!Main.dedServ||item.IsReservedHere())) Item_Despawning(item);
 	}
 }

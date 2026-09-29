@@ -84,18 +84,28 @@ Configs: {
 			Tooltip: Część miesjc na przedmioty w świecie która musi być zapełniona, żeby przedmioty zaczęły się łączyć
 		}
 
-		DespawnAbandonedItems: {
-			Label: Znikanie porzuconych przedmiotów
-			Tooltip:
-				'''
-				Upuszczone przedmioty, pozostawione zbyt długo, znikną
-				Zwiększa wydajność i zmniejsza szansę osiągnięcia limitu przedmiotów
-				'''
-		}
-
 		UnstuckItems: {
 			Label: Wydostawanie przedmiotów
 			Tooltip: Przedmioty, które utknęły w ziemii, będą powoli przemieszczać się w kierunku najbliższej pustej przestreni
+		}
+
+		ItemsDespawnTime: {
+			Label: Czas znikania przedmiotów
+			Tooltip:
+				'''
+				Czas, w minutach, po którym upuszczone przedmioty znikają
+				Skrócony o połowę dla pospolitych przedmiotów
+				Jeśli ustawione na 0, nie znikają
+				'''
+		}
+
+		PickupsDespawnTime: {
+			Label: Czas znikania jednorazówek
+			Tooltip:
+				'''
+				Czas, w minutach, po którym jednorazówki (np. leczące serca) znikają
+				Jeśli ustawione na 0, nie znikają
+				'''
 		}
 	}
 }
@@ -103,10 +113,7 @@ Configs: {
 Keybinds.ToggleAutosellForItem.DisplayName: Przełącz autosprzedaż dla przedmiotu
 
 Tooltips: {
-	ItemAutosold: {
-		Inventory: Ten przedmiot jest automatycznie sprzedawany
-		List: Ten przedmiot jest na liście do autosprzedaży, kliknij aby go usunąć
-	}
+	ItemAutosold: Ten przedmiot jest automatycznie sprzedawany
 
 	AutosellingEnabled: {
 		True: Autosprzedaż włączona, kliknij prawym aby wyłączyć

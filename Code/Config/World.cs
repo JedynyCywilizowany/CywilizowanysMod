@@ -15,7 +15,11 @@ public class CywilsConfig_World : ModConfig
 	[DefaultValue(0.25f)]
 	public float ThresholdForItemMerging{get;set;}
 	[DefaultValue(true)]
-	public bool DespawnAbandonedItems{get;set;}
-	[DefaultValue(true)]
 	public bool UnstuckItems{get;set;}
+	[Range(0,120)]
+	[DefaultValue(60)]
+	public int ItemsDespawnTime{get;set;}
+	[Range(0,10)]
+	[DefaultValue(1)]
+	public int PickupsDespawnTime{get;set;}
 }

@@ -1,5 +1,6 @@
 ﻿using ColonyLib;
 using System;
+using System.IO;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -8,10 +9,6 @@ namespace CywilizowanysMod.Globals;
 
 partial class CywilsGlobItem
 {
-	public override void OnStack(Item destination,Item source,int numToTransfer)
-	{
-		destination.timeSinceItemSpawned=Math.Min(destination.timeSinceItemSpawned,source.timeSinceItemSpawned);
-	}
 	public override bool OnPickup(Item item,Player player)
 	{
 		var modPlayer=player.GetModPlayer<CywilsPlayer>();
@@ -41,8 +38,17 @@ partial class CywilsGlobItem
 		var modPlayer=player.GetModPlayer<CywilsPlayer>();
 		return modPlayer.AutosellingActive&&modPlayer.IsItemAutosold(item.type);
 	}
-	public override bool CanStackInWorld(Item destination,Item source)
+
+	public override void OnStack(Item destination,Item source,int numToTransfer)
 	{
-		return false;
+		destination.timeSinceItemSpawned=Math.Min(destination.timeSinceItemSpawned,source.timeSinceItemSpawned);
+	}
+	public override void NetSend(Item item,BinaryWriter writer)
+	{
+		writer.Write7BitEncodedInt(item.timeSinceItemSpawned-ItemID.Sets.OverflowProtectionTimeOffset[item.type]);
+	}
+	public override void NetReceive(Item item, BinaryReader reader)
+	{
+		item.timeSinceItemSpawned=reader.Read7BitEncodedInt()+ItemID.Sets.OverflowProtectionTimeOffset[item.type];
 	}
 }

@@ -84,18 +84,28 @@ Configs: {
 			Tooltip: The fraction of world item slots that need to be filled for items to start merging
 		}
 
-		DespawnAbandonedItems: {
-			Label: Despawn Abandoned Items
-			Tooltip:
-				'''
-				Makes dropped items left for too long despawn
-				Improves performance and reduces the chance of reaching item cap
-				'''
-		}
-
 		UnstuckItems: {
 			Label: Unstuck Items
 			Tooltip: Makes items stuck in the ground slowly move to the nearest empty space
+		}
+
+		ItemsDespawnTime: {
+			Label: Item Despawn Time
+			Tooltip:
+				'''
+				Time, in minutes, needed for dropped items to despawn
+				Halved for common items
+				If set to 0, don't despawn
+				'''
+		}
+
+		PickupsDespawnTime: {
+			Label: Pickups Despawn Time
+			Tooltip:
+				'''
+				Time, in minutes, needed for pickups (ex. life hearts) to despawn
+				If set to 0, don't despawn
+				'''
 		}
 	}
 }
@@ -103,10 +113,7 @@ Configs: {
 Keybinds.ToggleAutosellForItem.DisplayName: Toggle Autosell For Item
 
 Tooltips: {
-	ItemAutosold: {
-		Inventory: This item is autosold
-		List: This item is listed as autosold, click to remove it
-	}
+	ItemAutosold: This item is autosold
 
 	AutosellingEnabled: {
 		True: Autoselling is currently enabled, right click to disable
