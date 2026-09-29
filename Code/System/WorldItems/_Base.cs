@@ -9,8 +9,10 @@ namespace CywilizowanysMod;
 
 partial class CywilsSystem
 {
-	internal static int itemCounter=0;
+	private static int itemCounter=0;
+	private static int itemCounterLocal=0;
 	internal static float itemCapProgress=0f;
+	internal static float itemCapProgressLocal=0f;
 	internal struct WorldItemUpdateData
 	{
 		public ushort unstuckingRadius;
@@ -19,7 +21,9 @@ partial class CywilsSystem
 	public override void PreUpdateItems()
 	{
 		itemCapProgress=((float)itemCounter)/Main.maxItems;
+		itemCapProgressLocal=((float)itemCounterLocal)/Main.maxItems;
 		itemCounter=0;
+		itemCounterLocal=0;
 		for (int i=0;i<Main.maxItems;i++)
 		{
 			var item=Main.item[i];
@@ -27,7 +31,8 @@ partial class CywilsSystem
 			if (item.active&&item.type!=ItemID.None&&item.stack>0&&item.whoAmI==i)
 			{
 				UpdateItem(item,ref updateDataRef);
-				itemCounter++;
+				if (!item.instanced) itemCounter++;
+				itemCounterLocal++;
 			}
 			else updateDataRef=default;
 		}
@@ -36,7 +41,7 @@ partial class CywilsSystem
 	{
 		var config=ModContent.GetInstance<CywilsConfig_World>();
 
-		if (!item.beingGrabbed&&!((itemCapProgress>config.ThresholdForItemMerging&&!item.beingGrabbed)&&Item_Merging(item)))
+		if (!item.beingGrabbed&&!(((item.instanced ? itemCapProgressLocal : itemCapProgress)>config.ThresholdForItemMerging)&&Item_Merging(item)))
 		{
 			if (config.UnstuckItems&&!Item_Unstucking_AvailableSpace(item.position+Vector2.One,item.BottomRight-Vector2.One)) Item_Unstucking(item,ref updateData.unstuckingRadius);
 			else

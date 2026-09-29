@@ -124,7 +124,6 @@ public class AutoSellerUI : UIState
 					spriteBatch.Draw(TextureAssets.MapDeath.Value,rect,Color.White);
 
 					ItemSlot.MouseHover(ref item,ItemSlot.Context.CraftingMaterial);
-					Main.HoverItem.GetGlobalItem<CywilsGlobItem>().isAutosellListDummy=true;
 				}
 			}
 		}

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace CywilizowanysMod.Globals;
 
-partial class CywilsGlobItem : GlobalItem
+partial class CywilsGlobItem
 {
 	public override void ModifyShootStats(Item item,Player player,ref Vector2 position,ref Vector2 velocity,ref int type,ref int damage,ref float knockback)
 	{

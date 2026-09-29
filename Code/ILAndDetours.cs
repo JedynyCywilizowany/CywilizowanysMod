@@ -1,4 +1,5 @@
 using System;
+using Terraria;
 /*
 using System.IO;
 using ColonyLib;
@@ -16,6 +17,11 @@ partial class CywilizowanysMod
 	{
 		try
 		{
+			On_Item.CombineWithNearbyItems+=(orig,item,index)=>
+			{
+				//Do nothing
+			};
+
 			//Disabled as the current implementation leads to a bug that breaks instanced items.
 			//Instead of fixing it, I decided to stop bothering to fix the base game's poor optimization, at least in this mod.
 			//I'm keeping the code here in case it's useful again some time in the future.

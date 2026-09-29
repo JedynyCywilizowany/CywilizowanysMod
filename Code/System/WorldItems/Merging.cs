@@ -1,3 +1,4 @@
+using System;
 using ColonyLib;
 using Terraria;
 using Terraria.ID;
@@ -14,12 +15,13 @@ partial class CywilsSystem
 		if (item.stack<item.maxStack)
 		{
 			const float maxStackRange=32*16;
-			var stackRangeSq=maxStackRange*itemCapProgress;
+			var capProgress=(item.instanced ? itemCapProgressLocal : itemCapProgress);
+			var stackRangeSq=maxStackRange*capProgress;
 			stackRangeSq*=stackRangeSq;
 			for (int i=0;i<Main.maxItems;i++)
 			{
 				Item item2=Main.item[i];
-				if (item2.active&&!item2.beingGrabbed&&item.whoAmI!=item2.whoAmI&&item2.type==item.type&&item2.stack>0&&item2.stack<item2.maxStack&&item.instanced==item2.instanced&&item.playerIndexTheItemIsReservedFor==item2.playerIndexTheItemIsReservedFor&&ItemLoader.CanStack(item,item2))
+				if (item2.active&&!item2.beingGrabbed&&item.whoAmI!=item2.whoAmI&&item2.type==item.type&&item2.stack>0&&item2.stack<item2.maxStack&&item.instanced==item2.instanced&&item.playerIndexTheItemIsReservedFor==item2.playerIndexTheItemIsReservedFor&&ItemLoader.CanStack(item,item2)&&ItemLoader.CanStackInWorld(item,item2))
 				{
 					var center=item.Center;
 					var center2=item2.Center;
@@ -28,17 +30,25 @@ partial class CywilsSystem
 					if (centerDistSq<=stackRangeSq)
 					{
 						isMerging=true;
-						item.noGrabDelay=15;
-						item2.noGrabDelay=15;
-						if (item.IsReservedHere()&&item.whoAmI<item2.whoAmI&&(centerDistSq<256f||itemCapProgress>0.9f))
+						item.Center=center.MoveTowards(center2,1f);
+						item.velocity=item.velocity.MoveTowards(centerDif,0.25f);
+						if (item.IsReservedHere())
+						{
+							item.keepTime=Math.Max(15,item.keepTime);
+							item.noGrabDelay=Math.Max(15,item.noGrabDelay);
+							item2.keepTime=Math.Max(15,item2.keepTime);
+							item2.noGrabDelay=Math.Max(15,item2.noGrabDelay);
+						}
+						if (item.IsReservedHere()&&item.whoAmI<item2.whoAmI&&(centerDistSq<256f||capProgress>0.9f))
 						{
 							ItemLoader.StackItems(item,item2,out int transferred);
 							if (item2.stack<=0)
 							{
-								item.Center=((item.Center*(item.stack-transferred))+(item2.Center*transferred))/item.stack;
-								item.velocity=((item.velocity*(item.stack-transferred))+(item2.velocity*transferred))/item.stack;
+								var balance=(float)transferred/item.stack;
+								item.Center=ColonyUtils.LerpVector2(item.Center,item2.Center,balance);
+								item.velocity=ColonyUtils.LerpVector2(item.velocity,item2.velocity,balance);
 
-								item2.TurnToAir();
+								item2.SetDefaults();
 								item2.active=false;
 							}
 							if (Main.netMode!=NetmodeID.SinglePlayer&&!item.instanced)
@@ -47,25 +57,14 @@ partial class CywilsSystem
 								netUpdate=true;
 							}
 						}
-						else
-						{
-							item.Center=center.MoveTowards(center2,1f);
-							item.velocity=item.velocity.MoveTowards(centerDif,0.25f);
-						}
 					}
 				}
 			}
 		}
-		else if (item.type==ItemID.CopperCoin||item.type==ItemID.SilverCoin||item.type==ItemID.GoldCoin)
+		else if (item.type>=ItemID.CopperCoin&&item.type<ItemID.PlatinumCoin)
 		{
 			var reservedIndex=item.playerIndexTheItemIsReservedFor;
-			item.SetDefaults(item.type switch
-			{
-				ItemID.CopperCoin=>ItemID.SilverCoin,
-				ItemID.SilverCoin=>ItemID.GoldCoin,
-				ItemID.GoldCoin=>ItemID.PlatinumCoin,
-				_=>ItemID.CopperCoin,
-			});
+			item.SetDefaults(item.type+1);
 			item.stack=1;
 			item.playerIndexTheItemIsReservedFor=reservedIndex;
 		}
